@@ -7,7 +7,7 @@ K = L{l,2};
 pl = K(K(:,3) == s,1:2);
 
 Names = L(:,1);
-File = strcat('PUD/',Names{l},'.csv');
+File = strcat(Names{l},'.csv');
 opts = detectImportOptions(File); %read the raw data
 TB = readtable(File,opts);
 
