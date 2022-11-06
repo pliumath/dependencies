@@ -75,9 +75,11 @@ for i = h:-1:1
         
     % find the parents of level i nodes
     p_i = unique(n_i(:,1));
-        
+
+    Tset = cell(length(p_i),1);
+
     % compute the polynomials for each parent node
-    for j = 1:length(p_i)
+    parfor j = 1:length(p_i)
             
         % find all children under then parent node p_i(j)
         children = n_i(n_i(:,1)==p_i(j),3);
@@ -101,8 +103,12 @@ for i = h:-1:1
         tempoly = [tempoly;y];
         
         % update the polynomial for the parent node p_i(j)
-        C{p_i(j)} = tempoly;
+        Tset{j} = tempoly;
             
+    end
+
+    for j = 1:length(p_i)
+        C{p_i(j)} = Tset{j};
     end
         
 end

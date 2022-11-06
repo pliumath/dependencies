@@ -20,14 +20,20 @@ temp = zeros(n*m,v);
 % compute the polynomial
 for i = 1:n
     
-    for j = 1:m
+    Tpro = zeros(m,v);
+    blk = zeros(1,v);
+
+    parfor j = 1:m
+
+        tp = p;
+        tq = q;
         
         % get terms to multiply
-        a = p(i,:);
-        b = q(j,:);
+        a = tp(i,:);
+        b = tq(j,:);
         
         % preallocate the product
-        ab = zeros(1,v);
+        ab = blk;
         
         % multiply
         for k = 1:v
@@ -44,8 +50,14 @@ for i = 1:n
         end
         
         % update he temporary product
-        temp((i-1)*m+j,:) = ab;
+        Tpro(j,:) = ab;
         
+    end
+
+    for j = 1:m
+
+        temp((i-1)*m+j,:) = Tpro(j,:);
+
     end
     
 end
