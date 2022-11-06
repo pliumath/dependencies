@@ -6,7 +6,7 @@ addpath('functions/');
 addpath('data/PUD/');
 
 Files = struct2cell(dir('data/PUD/')); %get all file names
-Files = Files(1,4:end)';
+Files = Files(1,3:end)';
 n = size(Files,1); %get the number of languages
 
 L = cell(n,2); %preallocate parent lists
@@ -29,15 +29,16 @@ m = length(SID); %number of sentences
 
 P = cell(m,n); %preallocate polynomials
 
-parfor j = 1:n %convert sentences to polynomials
+for j = 1:n %convert sentences to polynomials
 
     List = L{j,2}; %get parent lists in language j
 
-    for i = 1:m 
+    parfor i = 1:m 
 
         [SID(i),j]
 
-        T = List(List(:,3) == SID(i),:);
+        tList = List;
+        T = tList(tList(:,3) == SID(i),:);
 
         P{i,j} = pl2poly(T(:,1),T(:,2));
 
