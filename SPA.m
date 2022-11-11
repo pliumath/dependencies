@@ -29,11 +29,11 @@ m = length(SID); %number of sentences
 
 P = cell(m,n); %preallocate polynomials
 
-for j = 1:n %convert sentences to polynomials
+for j = 12:12 %convert sentences to polynomials
 
     List = L{j,2}; %get parent lists in language j
 
-    parfor i = 1:m 
+    for i = 1:m 
 
         [SID(i),j]
 
