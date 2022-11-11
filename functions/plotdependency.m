@@ -9,7 +9,7 @@ Colors(3,:) = Cls(4,:);
 Colors(4,:) = Cls(5,:);
 Colors(5,:) = Cls(2,:);
 
-fs = 16; %set font size
+fs = 18; %set font size
 
 n = size(pl,1); %number of nodes
 
@@ -29,9 +29,10 @@ WD = cell(n,1);
 
 for i = 1:n
 
-    WD(i,1) = strcat(wd{i},{' '},'(',num2str(pl(i,2)),')');
+    WD(i,1) = strcat(wd{i},{''},'(',num2str(pl(i,2)),')');
 
 end
+
 
 set(gcf,'position',[0 0 2000 600]);
 P = plot(G,'LineWidth',2,'Layout','layered','Sources',rt,'MarkerSize',7);
@@ -40,5 +41,19 @@ P.EdgeColor=Colors(s,:);
 P.NodeColor=Colors(s,:);
 P.NodeLabel = WD;
 P.NodeFontSize = fs;
+P.NodeFontName = 'Palatino';
+
+TTL = wd{1};
+
+for i = 2:n
+
+    TTL = strcat(TTL,{' '},wd{i});
+
+end
+
+box on
+
+dim = [0.22,0.82, 0.625, 0.1];
+annotation('textbox',dim,'String',TTL,'FontSize',fs,'FontName','Palatino','LineStyle','none');
 
 end

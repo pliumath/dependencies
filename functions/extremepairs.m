@@ -3,9 +3,12 @@ function [m,mp,M,Mp] = extremepairs(D,L,l1,l2)
 %distance and maximum language distance between languages l1 and l2.
 
 Dists = D(l1,l2,:);
-m = min(Dists);
 
-M = max(Dists);
+SD = sort(Dists);
+
+m = SD(1);
+
+M = SD(end);
 
 K = L{l1,2};
 
